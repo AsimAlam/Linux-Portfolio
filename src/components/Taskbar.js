@@ -60,41 +60,43 @@ const MakeYourOwnButton = styled.button`
 `;
 
 function Taskbar({ windows, onOpenWindow }) {
-    const [showStartMenu, setShowStartMenu] = React.useState(false);
+  const [showStartMenu, setShowStartMenu] = React.useState(false);
 
-    const windowIcons = {
-        Resume: resumeIcon,
-        About: aboutIcon,
-        FileManager: fileManagerIcon,
-        Terminal: terminalIcon,
-    };
+  const windowIcons = {
+    Resume: resumeIcon,
+    About: aboutIcon,
+    FileManager: fileManagerIcon,
+    Terminal: terminalIcon,
+  };
 
-    return (
-        <TaskbarContainer>
-            <StartButton onClick={() => setShowStartMenu(!showStartMenu)}>
-                Start
-            </StartButton>
-            {showStartMenu && (
-                <StartMenu
-                    onSelect={(name) => {
-                        onOpenWindow(name);
-                        setShowStartMenu(false);
-                    }}
-                />
-            )}
-            {Object.keys(windows).map((win) => {
-                if (win === "Terminal" || win === "FileManager" || windows[win].opened) {
-                    return (
-                        <MinimizedButton key={win} onClick={() => onOpenWindow(win)}>
-                            <img src={windowIcons[win]} alt={win} />
-                        </MinimizedButton>
-                    );
-                }
-                return null;
-            })}
-            <MakeYourOwnButton>MAKE YOUR OWN</MakeYourOwnButton>
-        </TaskbarContainer>
-    );
+  return (
+    <TaskbarContainer>
+      <StartButton onClick={() => setShowStartMenu(!showStartMenu)}>
+        Start
+      </StartButton>
+      {showStartMenu && (
+        <StartMenu
+          onSelect={(name) => {
+            onOpenWindow(name);
+            setShowStartMenu(false);
+          }}
+        />
+      )}
+      {Object.keys(windows).map((win) => {
+        if (win === "Terminal" || win === "FileManager" || windows[win].opened) {
+          return (
+            <MinimizedButton key={win} onClick={() => onOpenWindow(win)}>
+              <img src={windowIcons[win]} alt={win} />
+            </MinimizedButton>
+          );
+        }
+        return null;
+      })}
+      <MakeYourOwnButton onClick={() => onOpenWindow("MakeYourOwn")}>
+        MAKE YOUR OWN
+      </MakeYourOwnButton>
+    </TaskbarContainer>
+  );
 }
 
 export default Taskbar;
