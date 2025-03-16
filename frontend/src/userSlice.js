@@ -1,18 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     name: "",
     about: "",
     skills: "",
-    resume: null, // will hold a base64 data URL for the PDF
+    resume: null,
+    email: "",
 };
 
 const userSlice = createSlice({
-    name: 'user',
+    name: "user",
     initialState,
     reducers: {
         setUserDetails: (state, action) => {
-            // Overwrite the state with the new details
             return { ...state, ...action.payload };
         },
     },
